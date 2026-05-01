@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>落以 · 个人主页</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #EDF4FC;
+            --surface: rgba(255, 255, 255, 0.5);
+            --border: rgba(255, 255, 255, 0.65);
+            --ink: #1A1D2E;
+            --ink-secondary: #5A5E72;
+            --ink-muted: #7A7F9E;
+            --accent: #8B7EC8;
+            --accent-soft: rgba(139, 126, 200, 0.12);
+            --accent-glow: rgba(139, 126, 200, 0.25);
+            --pink: #E8A0BF;
+            --mint: #8ECFCF;
+            --lavender: #C5B4E3;
+            --shadow-md: 0 8px 32px rgba(26, 29, 46, 0.06), 0 2px 8px rgba(26, 29, 46, 0.03);
+            --shadow-lg: 0 20px 60px rgba(26, 29, 46, 0.1), 0 4px 16px rgba(26, 29, 46, 0.04);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+            background: transparent;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+
+        ::selection {
+            background: var(--accent-glow);
+        }
+
+        /* ─── 背景 ─── */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: linear-gradient(170deg,
+                #EDF4FC 0%,
+                #E2EFFC 30%,
+                #D8EAFB 60%,
+                #CEE5FA 100%
+            );
+        }
+
+        #bubbles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ─── 主布局 ─── */
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+            scroll-snap-align: start;
+        }
+
+        /* ─── 顶部导航 ─── */
+        nav {
+            padding: 14px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(237, 244, 252, 0.75);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            flex-shrink: 0;
+        }
+
+        nav .logo {
+            font-weight: 200;
+            font-size: 1.1rem;
+            letter-spacing: 0.12em;
+            color: var(--ink);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--ink-muted);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover { color: var(--ink); }
+
+        /* ─── 内容区 ─── */
+        .content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 20px;
+            padding: 20px 48px 24px;
+            min-height: 0;
+        }
+
+        /* ─── Hero（左上） ─── */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-right: 24px;
+        }
+
+        .hero-label {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: 8px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent), var(--pink), var(--mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero .line {
+            width: 32px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), var(--pink));
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--ink-secondary);
+            max-width: 320px;
+            line-height: 1.7;
+        }
+
+        /* ─── 统计卡（右上） ─── */
+        .stats-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            padding-left: 24px;
+            border-left: 1px solid rgba(155, 159, 181, 0.1);
+        }
+
+        .stat-card {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px 22px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .stat-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+        }
+
+        /* ─── 关于（左下） ─── */
+        .about {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 24px;
+        }
+
+        .about-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(197, 180, 227, 0.35), rgba(142, 207, 207, 0.35));
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 8px 24px rgba(139, 126, 200, 0.15);
+            margin-bottom: 16px;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-head h2 {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+        }
+
+        .about p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--ink-secondary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tags span {
+            padding: 4px 14px;
+            background: var(--surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--ink-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tags span:hover {
+            background: var(--accent-soft);
+            border-color: rgba(139, 126, 200, 0.3);
+            color: var(--ink);
+        }
+
+        /* ─── 项目+联系（右下） ─── */
+        .right-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+            padding-left: 24px;
+            border-left: 1px solid rgba(155, 159, 181, 0.1);
+        }
+
+        .rb-section-label {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: -4px;
+        }
+
+        .project-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .p-card {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--pink), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .p-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .p-card:hover::after { opacity: 1; }
+
+        .p-card {
+            cursor: pointer;
+        }
+
+        .p-card .p-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+
+        .p-card .p-tag.hw {
+            background: rgba(142, 207, 207, 0.2);
+            color: #4A9E9E;
+        }
+
+        .p-card .p-tag.web {
+            background: rgba(139, 126, 200, 0.15);
+            color: #7B6EB8;
+        }
+
+        .p-card h3 {
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .p-card p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--ink-muted);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .c-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            text-decoration: none;
+            color: var(--ink-secondary);
+            font-size: 0.82rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .c-chip:hover {
+            background: var(--accent-soft);
+            border-color: rgba(139, 126, 200, 0.3);
+            color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        .c-chip .c-icon {
+            font-size: 0.8rem;
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            padding: 16px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            border-top: 1px solid rgba(155, 159, 181, 0.1);
+        }
+
+        footer span {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--ink-muted);
+            letter-spacing: 0.04em;
+        }
+
+        footer .contact-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* ─── 页面旋转开页动画 ─── */
+        html {
+            perspective: 1200px;
+        }
+
+        .page-wrapper {
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            animation: pageRotateIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+        }
+
+        @keyframes pageRotateIn {
+            0% {
+                transform: rotateY(-90deg) scale(0.8);
+                opacity: 0;
+            }
+            40% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateY(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .page-wrapper::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: linear-gradient(170deg, #d4e2f4, #c8daf5);
+            animation: coverFade 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+            pointer-events: none;
+        }
+
+        @keyframes coverFade {
+            0% { opacity: 1; }
+            60% { opacity: 0.3; }
+            100% { opacity: 0; }
+        }
+
+        .curtain-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            font-family: 'Inter', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 200;
+            letter-spacing: 0.25em;
+            color: var(--ink);
+            animation: logoReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+            pointer-events: none;
+        }
+
+        @keyframes logoReveal {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.6);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            70% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        /* ─── 入场 & 滚动动画 ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeScale {
+            from { opacity: 0; transform: scale(0.95) translateY(16px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero .avatar, .hero-label, .hero h1, .hero .line, .hero p {
+            opacity: 0;
+        }
+
+        .page-loaded .hero .avatar {
+            animation: fadeUp 0.6s ease both 0.2s;
+        }
+        .page-loaded .hero-label {
+            animation: fadeUp 0.6s ease both 0.3s;
+        }
+        .page-loaded .hero h1 {
+            animation: fadeUp 0.6s ease both 0.4s;
+        }
+        .page-loaded .hero .line {
+            animation: fadeLeft 0.5s ease both 0.5s;
+        }
+        .page-loaded .hero p {
+            animation: fadeUp 0.6s ease both 0.6s;
+        }
+
+        .stat-card {
+            opacity: 0;
+        }
+
+        .page-loaded .stat-card { animation: fadeRight 0.5s ease both; }
+        .page-loaded .stat-card:nth-child(1) { animation-delay: 0.45s; }
+        .page-loaded .stat-card:nth-child(2) { animation-delay: 0.55s; }
+        .page-loaded .stat-card:nth-child(3) { animation-delay: 0.65s; }
+
+        /* 滚动触发：默认隐藏 */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-reveal.from-left {
+            transform: translateX(-24px);
+        }
+
+        .scroll-reveal.from-left.visible {
+            transform: translateX(0);
+        }
+
+        .scroll-reveal.from-right {
+            transform: translateX(24px);
+        }
+
+        .scroll-reveal.from-right.visible {
+            transform: translateX(0);
+        }
+
+        .scroll-reveal.scale-in {
+            transform: scale(0.95) translateY(16px);
+        }
+
+        .scroll-reveal.scale-in.visible {
+            transform: scale(1) translateY(0);
+        }
+
+        /* ─── 详细作品区 ─── */
+        .projects-section {
+            padding: 48px 48px 0;
+            scroll-snap-align: start;
+        }
+
+        .projects-section h2 {
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            margin-bottom: 24px;
+        }
+
+        .project-detail {
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 16px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .project-detail:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-detail .pd-info h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+
+        .project-detail .pd-info p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--ink-secondary);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .project-detail .pd-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .project-detail .pd-tags span {
+            padding: 3px 12px;
+            background: var(--accent-soft);
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .project-detail a.pd-link {
+            margin-left: auto;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 400;
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .project-detail a.pd-link:hover {
+            background: #7B6EB8;
+            transform: translateY(-2px);
+        }
+
+        /* ─── GitHub 横幅 ─── */
+        .github-banner {
+            margin: 32px 48px;
+            padding: 28px 36px;
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .github-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .github-banner .gb-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .github-banner .gb-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .github-banner .gb-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .github-banner .gb-text h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .github-banner .gb-text p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--ink-secondary);
+        }
+
+        .github-banner .gb-btn {
+            padding: 10px 24px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 400;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .github-banner .gb-btn:hover {
+            background: #2A2D42;
+            transform: translateY(-2px);
+        }
+
+        /* ─── 响应式 ─── */
+        @media (max-width: 860px) {
+            .content {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                padding: 16px 24px 20px;
+                overflow-y: auto;
+            }
+            html, body { overflow: auto; }
+            .page { height: auto; min-height: 100vh; }
+            .stats-col, .right-bottom { border-left: none; padding-left: 0; border-top: 1px solid rgba(155, 159, 181, 0.1); padding-top: 16px; }
+            .hero, .about { padding-right: 0; }
+            nav { padding: 12px 24px; }
+            footer { padding: 14px 24px; flex-wrap: wrap; gap: 10px; }
+            .projects-section { padding: 40px 24px 0; }
+            .project-detail { flex-direction: column; align-items: flex-start; }
+            .project-detail a.pd-link { margin-left: 0; }
+            .github-banner { margin: 24px; flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 开幕 logo -->
+    <div class="curtain-logo">LUO YI</div>
+
+    <div class="bg-gradient"></div>
+    <canvas id="bubbles"></canvas>
+
+    <div class="page-wrapper">
+    <div class="page">
+        <nav>
+            <div class="logo">LUO YI</div>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">关于</a></li>
+                <li><a href="#">作品</a></li>
+                <li><a href="#">联系</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- 左上：Hero -->
+            <div class="hero">
+                <div class="avatar"><img src="avatar.jpg" alt="落以"></div>
+                <div class="hero-label">嵌入式工程师</div>
+                <h1>你好，我是<span>落以</span></h1>
+                <div class="line"></div>
+                <p>专注 STM32 + FreeRTOS 嵌入式开发，关注多任务调度、外设驱动、通信协议与 IoT 云端数据链路。</p>
+            </div>
+
+            <!-- 右上：统计 -->
+            <div class="stats-col">
+                <div class="stat-card">
+                    <span class="stat-num">5+</span>
+                    <span class="stat-label">年经验</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num">30</span>
+                    <span class="stat-label">个项目</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num">12</span>
+                    <span class="stat-label">项荣誉</span>
+                </div>
+            </div>
+
+            <!-- 左下：关于 -->
+            <div class="about scroll-reveal from-left">
+                <div class="about-head">
+                    <h2>关于我</h2>
+                </div>
+                <p>专注嵌入式软件开发，关注多任务调度、外设驱动、通信协议与 IoT 云端数据链路专注嵌入式系统开发，熟悉 STM32 平台与 FreeRTOS 实时操作系统。具备从底层外设驱动、任务调度、数据解析到无线通信与云端上报的完整项目实践经验。</p>
+                <div class="tags">
+                    <span>STM32</span>
+                    <span>FreeRTOS</span>
+                    <span>ESP32</span>
+                    <span>Vue / React</span>
+                    <span>Node.js</span>
+                    <span>TypeScript</span>
+                    <span>Python</span>
+                    <span>PCB 设计</span>
+                    <span>LoRa / NB-IoT</span>
+                </div>
+            </div>
+
+            <!-- 右下：项目 + 联系 -->
+            <div class="right-bottom scroll-reveal from-right">
+                <div class="rb-section-label">精选作品</div>
+                <div class="project-row">
+                    <a class="p-card" href="https://github.com/luoyi778778/P_01_GPS_FreeRTOS_send" target="_blank" style="text-decoration:none;color:inherit;">
+                        <span class="p-tag hw">IoT 硬件</span>
+                        <h3>GPS宠物定位器</h3>
+                        <p>STM32F103 + FreeRTOS，GPS定位/计步/NB-IoT上报，10秒周期采集</p>
+                    </a>
+                    <div class="p-card">
+                        <span class="p-tag web">Web 应用</span>
+                        <h3>城市漫步</h3>
+                        <p>地理位置摄影日记</p>
+                    </div>
+                    <div class="p-card">
+                        <span class="p-tag web">Web 工具</span>
+                        <h3>字里行间</h3>
+                        <p>中文排版工具</p>
+                    </div>
+                    <div class="p-card">
+                        <span class="p-tag web">开源社区</span>
+                        <h3>星图集</h3>
+                        <p>开源社区贡献项目</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 详细作品区 -->
+        <div class="projects-section">
+            <h2 class="scroll-reveal">项目详情</h2>
+            <div class="project-detail scroll-reveal scale-in">
+                <div class="pd-info">
+                    <span class="p-tag hw" style="margin-bottom:8px;">IoT 硬件</span>
+                    <h3>GPS 宠物定位器</h3>
+                    <p>基于 STM32F103 + FreeRTOS 的宠物追踪设备。通过 AT6558R GPS 模块定位、DS3553 计步，每 10 秒采集一次数据，经 QS100 NB-IoT 上报，LoRa(LLCC68) 备用链路。JSON 格式包含经纬度、步数、时间戳。</p>
+                    <div class="pd-tags">
+                        <span>STM32</span>
+                        <span>FreeRTOS</span>
+                        <span>GPS</span>
+                        <span>NB-IoT</span>
+                        <span>LoRa</span>
+                        <span>CMake</span>
+                    </div>
+                </div>
+                <a class="pd-link" href="https://github.com/luoyi778778/P_01_GPS_FreeRTOS_send" target="_blank">查看项目</a>
+            </div>
+        </div>
+
+        <!-- GitHub 主页跳转 -->
+        <div class="github-banner scroll-reveal scale-in">
+            <div class="gb-left">
+                <div class="gb-icon">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                </div>
+                <div class="gb-text">
+                    <h3>GitHub 主页</h3>
+                    <p>查看我的所有开源项目与代码仓库</p>
+                </div>
+            </div>
+            <a class="gb-btn" href="https://github.com/luoyi778778" target="_blank">访问 GitHub →</a>
+        </div>
+
+        <footer>
+            <span>&copy; 2026 落以 · 用热爱构建</span>
+            <div class="contact-row">
+                <a class="c-chip" href="mailto:hello@example.com">
+                    <span class="c-icon">✉</span> 邮箱
+                </a>
+                <a class="c-chip" href="https://github.com/luoyi778778" target="_blank">
+                    <span class="c-icon">⌘</span> GitHub
+                </a>
+                <a class="c-chip" href="https://twitter.com" target="_blank">
+                    <span class="c-icon">𝕏</span> Twitter
+                </a>
+                <a class="c-chip" href="#">
+                    <span class="c-icon">✦</span> 微信
+                </a>
+            </div>
+        </footer>
+    </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bubbles');
+        const ctx = canvas.getContext('2d');
+        let W, H;
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const tints = [
+            [180, 210, 245],  // sky blue
+            [200, 220, 250],  // light blue
+            [170, 205, 240],  // blue
+            [190, 215, 248],  // soft blue
+            [210, 228, 252],  // pale blue
+        ];
+
+        class Bubble {
+            constructor() { this.reset(true); }
+            reset(init) {
+                this.r = Math.random() * 14 + 6;
+                this.x = Math.random() * W;
+                this.y = init ? Math.random() * H : H + this.r * 2;
+                this.vy = -(Math.random() * 0.35 + 0.15);
+                this.phase = Math.random() * Math.PI * 2;
+                this.wobbleSpeed = Math.random() * 0.015 + 0.005;
+                this.wobbleAmp = Math.random() * 0.8 + 0.3;
+                this.tint = tints[Math.floor(Math.random() * tints.length)];
+                this.alpha = Math.random() * 0.18 + 0.08;
+            }
+            update() {
+                this.phase += this.wobbleSpeed;
+                this.x += Math.sin(this.phase) * this.wobbleAmp;
+                this.y += this.vy;
+                if (this.y < -this.r * 2) this.reset(false);
+            }
+            draw() {
+                const [cr, cg, cb] = this.tint;
+                // bubble body — very transparent fill
+                const bodyGrad = ctx.createRadialGradient(
+                    this.x - this.r * 0.3, this.y - this.r * 0.3, this.r * 0.1,
+                    this.x, this.y, this.r
+                );
+                bodyGrad.addColorStop(0, `rgba(${cr},${cg},${cb},${this.alpha * 0.5})`);
+                bodyGrad.addColorStop(0.6, `rgba(${cr},${cg},${cb},${this.alpha * 0.25})`);
+                bodyGrad.addColorStop(1, `rgba(${cr},${cg},${cb},${this.alpha * 0.08})`);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fillStyle = bodyGrad;
+                ctx.fill();
+
+                // bubble edge — thin ring
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(${cr},${cg},${cb},${this.alpha * 0.6})`;
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+
+                // highlight — small white shine
+                const hx = this.x - this.r * 0.3;
+                const hy = this.y - this.r * 0.35;
+                const shine = ctx.createRadialGradient(hx, hy, 0, hx, hy, this.r * 0.35);
+                shine.addColorStop(0, `rgba(255,255,255,${this.alpha * 0.8})`);
+                shine.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.beginPath();
+                ctx.arc(hx, hy, this.r * 0.35, 0, Math.PI * 2);
+                ctx.fillStyle = shine;
+                ctx.fill();
+            }
+        }
+
+        const bubbles = Array.from({ length: 18 }, () => new Bubble());
+        (function animate() {
+            ctx.clearRect(0, 0, W, H);
+            bubbles.forEach(b => { b.update(); b.draw(); });
+            requestAnimationFrame(animate);
+        })();
+
+        // ─── 页面入场：旋转动画开始后触发首屏元素动画 ───
+        setTimeout(() => {
+            document.querySelector('.page').classList.add('page-loaded');
+        }, 400);
+        setTimeout(() => {
+            const logo = document.querySelector('.curtain-logo');
+            if (logo) logo.remove();
+        }, 1300);
+
+        // ─── 滚动触发动画 ───
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
