@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="落以的个人主页 - 专注 STM32 + FreeRTOS 嵌入式开发，关注多任务调度、外设驱动、通信协议与 IoT 云端数据链路">
     <title>落以 · 个人主页</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -68,6 +70,7 @@
             z-index: 0;
             pointer-events: none;
             opacity: 0.62;
+            will-change: transform;
         }
 
         .tech-grid {
@@ -361,6 +364,7 @@
             position: relative;
             overflow: hidden;
             min-height: 178px;
+            cursor: pointer;
         }
 
         .p-card::after {
@@ -381,10 +385,6 @@
         }
 
         .p-card:hover::after { opacity: 1; }
-
-        .p-card {
-            cursor: pointer;
-        }
 
         .project-row .p-card {
             grid-column: span 2;
@@ -1059,7 +1059,7 @@
 
     <div class="page-wrapper">
     <div class="page" id="top">
-        <nav>
+        <nav aria-label="主导航">
             <div class="logo">LUO YI</div>
             <ul>
                 <li><a href="#top">首页</a></li>
@@ -1098,8 +1098,8 @@
             <!-- 项目 + 联系 -->
             <div class="right-bottom">
                 <div class="rb-section-label">精选作品</div>
-                <div class="project-row">
-                    <a class="p-card featured-embedded" href="https://github.com/luoyi778778/P_01_GPS_FreeRTOS_send" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+                <div class="project-row" role="list" aria-label="精选项目">
+                    <a class="p-card featured-embedded" href="https://github.com/luoyi778778/P_01_GPS_FreeRTOS_send" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;" role="listitem">
                         <span class="p-tag hw">IoT 硬件</span>
                         <h3>GPS宠物定位器</h3>
                         <div class="p-facts">
@@ -1108,7 +1108,7 @@
                             <span><b>亮点</b>10秒采集 / NB-IoT上报 / LoRa备用</span>
                         </div>
                     </a>
-                    <a class="p-card" href="https://github.com/luoyi778778/Daily" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+                    <a class="p-card" href="https://github.com/luoyi778778/Daily" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;" role="listitem">
                         <span class="p-tag web">移动应用</span>
                         <h3>Daily 学习打卡</h3>
                         <div class="p-facts">
@@ -1117,7 +1117,7 @@
                             <span><b>亮点</b>多端运行 / 月历视图 / 离线容错</span>
                         </div>
                     </a>
-                    <a class="p-card" href="https://github.com/luoyi778778/luoyi778778.github.io" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+                    <a class="p-card" href="https://github.com/luoyi778778/luoyi778778.github.io" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;" role="listitem">
                         <span class="p-tag ai">AI 辅助开发</span>
                         <h3>个人主页网站</h3>
                         <div class="p-facts">
@@ -1131,7 +1131,7 @@
         </div>
 
         <!-- 详细作品区 -->
-        <div class="projects-section" id="projects">
+        <section class="projects-section" id="projects" aria-label="项目详情">
             <h2 class="scroll-reveal from-right">项目详情</h2>
             <div class="project-detail scroll-reveal from-left">
                 <div class="pd-info">
@@ -1196,10 +1196,10 @@
                 </div>
                 <a class="pd-link" href="https://github.com/luoyi778778/luoyi778778.github.io" target="_blank" rel="noopener noreferrer">查看项目</a>
             </div>
-        </div>
+        </section>
 
         <!-- GitHub 主页跳转 -->
-        <div class="github-banner scroll-reveal from-right">
+        <div class="github-banner scroll-reveal from-right" role="complementary" aria-label="GitHub 主页链接">
             <div class="gb-left">
                 <div class="gb-icon">
                     <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -1212,7 +1212,7 @@
             <a class="gb-btn" href="https://github.com/luoyi778778" target="_blank" rel="noopener noreferrer">访问 GitHub →</a>
         </div>
 
-        <footer id="contact">
+        <footer id="contact" role="contentinfo">
             <span>&copy; 2026 落以 · 用热爱构建</span>
             <div class="contact-row">
                 <a class="c-chip" href="#" data-contact-email aria-label="复制邮箱">
@@ -1231,23 +1231,23 @@
     </div>
 
     <!-- 联系面板 -->
-    <div class="contact-page" id="contactPage">
+    <div class="contact-page" id="contactPage" role="dialog" aria-modal="true" aria-label="联系我">
         <div class="contact-page__backdrop" id="contactBackdrop"></div>
         <div class="contact-page__panel">
-            <button class="contact-page__close" id="contactClose" aria-label="关闭">&times;</button>
+            <button class="contact-page__close" id="contactClose" aria-label="关闭联系面板">&times;</button>
             <span class="contact-page__kicker">Contact</span>
             <h2>联系我</h2>
             <p>如有合作或交流意向，欢迎通过以下邮箱联系。</p>
             <div class="contact-page__email" id="contactEmailDisplay"></div>
             <div class="contact-page__actions">
-                <button class="contact-page__copy" id="contactCopy">复制邮箱</button>
+                <button class="contact-page__copy" id="contactCopy" aria-label="复制邮箱地址到剪贴板">复制邮箱</button>
                 <span class="contact-page__note" id="contactNote"></span>
             </div>
         </div>
     </div>
 
     <!-- 返回顶部按钮 -->
-    <button class="back-to-top" id="backToTop" aria-label="返回顶部">
+    <button class="back-to-top" id="backToTop" aria-label="返回页面顶部" title="返回顶部">
         <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </button>
 
@@ -1418,28 +1418,25 @@
 
         // ─── 返回顶部按钮显隐 ───
         const backToTop = document.getElementById('backToTop');
-        const positionBackToTop = () => {
+        const updateBackToTop = () => {
             const margin = window.innerWidth <= 860 ? 20 : 32;
             const viewport = window.visualViewport;
-            const width = viewport && Number.isFinite(viewport.width) ? viewport.width : window.innerWidth;
-            const height = viewport && Number.isFinite(viewport.height) ? viewport.height : window.innerHeight;
-            const offsetLeft = viewport && Number.isFinite(viewport.offsetLeft) ? viewport.offsetLeft : 0;
-            const offsetTop = viewport && Number.isFinite(viewport.offsetTop) ? viewport.offsetTop : 0;
+            const width = viewport?.width ?? window.innerWidth;
+            const height = viewport?.height ?? window.innerHeight;
+            const offsetLeft = viewport?.offsetLeft ?? 0;
+            const offsetTop = viewport?.offsetTop ?? 0;
             backToTop.style.left = `${offsetLeft + width - 44 - margin}px`;
             backToTop.style.top = `${offsetTop + height - 44 - margin}px`;
-        };
-        const updateBackToTop = () => {
-            positionBackToTop();
             backToTop.classList.toggle('visible', window.scrollY > 8);
         };
         updateBackToTop();
-        window.addEventListener('scroll', updateBackToTop, { passive: true });
-        window.addEventListener('hashchange', updateBackToTop);
-        window.addEventListener('load', updateBackToTop);
-        window.addEventListener('resize', updateBackToTop);
+        ['scroll', 'hashchange', 'load', 'resize'].forEach(e =>
+            window.addEventListener(e, updateBackToTop, { passive: true })
+        );
         if (window.visualViewport) {
-            window.visualViewport.addEventListener('resize', updateBackToTop);
-            window.visualViewport.addEventListener('scroll', updateBackToTop);
+            ['resize', 'scroll'].forEach(e =>
+                window.visualViewport.addEventListener(e, updateBackToTop)
+            );
         }
 
         backToTop.addEventListener('click', () => {
