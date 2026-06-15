@@ -286,8 +286,8 @@
         /* ─── Work Grid ─── */
         .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
         }
 
         .project-card {
@@ -352,6 +352,12 @@
         }
         .work-visual--yellow { 
             background-color: color-mix(in srgb, var(--yellow) 58%, var(--surface)); 
+            background-image: linear-gradient(rgba(21, 21, 21, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(21, 21, 21, 0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: -1px -1px;
+        }
+        .work-visual--coral { 
+            background-color: color-mix(in srgb, var(--coral) 48%, var(--surface)); 
             background-image: linear-gradient(rgba(21, 21, 21, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(21, 21, 21, 0.06) 1px, transparent 1px);
             background-size: 20px 20px;
             background-position: -1px -1px;
@@ -841,6 +847,28 @@
                             <p class="project-type">AI 辅助开发</p>
                             <h3>个人主页网站</h3>
                             <p>融合 AI 工具迭代构建的响应式个人主页，展现前端工程化能力与现代化的视觉排版审美。</p>
+                            <span class="text-button">查看源码</span>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/luoyi778778/Book-search-agent" target="_blank" rel="noopener noreferrer" class="project-card reveal">
+                        <div class="work-visual work-visual--coral">
+                            <div class="visual-content">
+                                <span class="visual-label">04</span>
+                                <h4 class="visual-title">图书搜索助手</h4>
+                                <span class="visual-subtitle">AI AGENT</span>
+                                <p class="visual-desc">基于大语言模型的智能图书搜索与推荐。</p>
+                            </div>
+                            <div class="t-block" style="width: 50px; background: var(--sky); top: 60px; left: 155px;"></div>
+                            <div class="t-block" style="width: 70px; background: var(--mint); top: 80px; left: 175px;"></div>
+                            <div class="t-block" style="width: 40px; background: var(--yellow); top: 100px; left: 145px;"></div>
+                            <span class="visual-wave"></span>
+                            <span class="visual-track"></span>
+                        </div>
+                        <div class="project-card__body">
+                            <p class="project-type">AI 智能体开发</p>
+                            <h3>图书搜索 Agent</h3>
+                            <p>基于大语言模型构建的智能图书搜索与推荐助手，支持自然语言检索和个性化推荐。</p>
                             <span class="text-button">查看源码</span>
                         </div>
                     </a>
